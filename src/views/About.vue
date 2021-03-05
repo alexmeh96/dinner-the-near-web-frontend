@@ -1,5 +1,5 @@
 <template>
-  <div class="about">
-    <h1>This is an about page</h1>
-  </div>
+  <v-row class="text-center justify-center py-16">
+    <h1>Эта страница о нас</h1>
+  </v-row>
 </template>
