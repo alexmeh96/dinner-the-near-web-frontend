@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
+import store from '@/store'
 
 Vue.use(VueRouter)
 
@@ -17,9 +18,24 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
   },
   {
+    path: '/admin',
+    name: 'Admin',
+    component: () => import(/* webpackChunkName: "about" */ '../views/Admin.vue')
+  },
+  {
     path: '/profile',
     name: 'Profile',
     component: () => import(/* webpackChunkName: "about" */ '../views/Profile.vue')
+  },
+  {
+    path: '/mealPage/:mealId',
+    name: 'MealPage',
+    component: () => import(/* webpackChunkName: "about" */ '../views/MealPage.vue')
+  },
+  {
+    path: '/restaurantPage/:restaurantId',
+    name: 'RestaurantPage',
+    component: () => import(/* webpackChunkName: "about" */ '../views/RestaurantPage.vue')
   },
   {
     path: '/login',
@@ -29,7 +45,7 @@ const routes = [
   {
     path: '/establishment',
     name: 'Establishment',
-    component: () => import(/* webpackChunkName: "about" */ '../views/Establishment.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../views/Restaurant.vue')
   },
   {
     path: '/meal',
@@ -45,10 +61,14 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  const currentUser = false
 
- console.log(to.meta)
-  if (to.name ==='Profile' && !currentUser) {
+  if (to.name ==='Profile' && !store.getters.getLoggedIn) {
+    next({name: 'Login'})
+  } else {
+    next()
+  }
+
+  if (to.name ==='Admin' && !store.getters.getUser.isAdmin) {
     next({name: 'Login'})
   } else {
     next()

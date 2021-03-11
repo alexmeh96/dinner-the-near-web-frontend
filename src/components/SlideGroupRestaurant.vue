@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-row class="text-center justify-center py-6">
-      <h2>Новые блюда</h2>
+      <h2>Популярные заведения</h2>
     </v-row>
     <v-slide-group
         v-model="model"
@@ -9,30 +9,30 @@
         show-arrows
     >
       <v-slide-item
-          v-for="meal in meals"
-          :key="meal.id">
+          v-for="restaurant in restaurants"
+          :key="restaurant.id">
 
-        <MealCard v-bind:meal="meal"/>
+        <RestaurantCard v-bind:restaurant="restaurant"/>
       </v-slide-item>
     </v-slide-group>
   </v-container>
 </template>
 
 <script>
-import MealCard from "@/components/MealCard";
-import Meal from "@/models/meal";
+import RestaurantCard from "@/components/RestaurantCard";
+import Restaurant from "@/models/restaurant";
 
 export default {
   data: () => ({
     model: null,
-    meals: [new Meal()]
+    restaurants: [new Restaurant()]
   }),
   components: {
-    MealCard
+    RestaurantCard
   },
   async mounted() {
     try {
-      this.meals = await this.$store.dispatch('mealPopularAct')
+      this.restaurants = await this.$store.dispatch('restaurantPopularAct')
     } catch {
       console.log('bad!')
     }

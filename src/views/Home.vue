@@ -3,22 +3,24 @@
 <!--    <HelloWorld />-->
 
     <SlideGroupMeal />
-    <SlideGroupEstab />
+    <SlideGroupRestaurant />
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
 // import HelloWorld from '@/components/HelloWorld.vue'
 import SlideGroupMeal from "@/components/SlideGroupMeal";
-import SlideGroupEstab from "@/components/SlideGroupEstab";
+import SlideGroupRestaurant from "@/components/SlideGroupRestaurant";
 
 export default {
   name: 'Home',
   components: {
     // HelloWorld,
     SlideGroupMeal,
-    SlideGroupEstab
-  }
+    SlideGroupRestaurant
+  },
+  data: () => ({
+  }),
+
 }
 </script>
